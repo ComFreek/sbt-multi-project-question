@@ -1,0 +1,4 @@
+[submodule "projectB"]
+	path = projectB
+	url = https://github.com/UniFormal/MMT.git
+	branch = devel
