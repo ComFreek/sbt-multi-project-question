@@ -1,8 +1,29 @@
+See [my question at StackOverflow](https://stackoverflow.com/q/54980499/603003).
+
+<hr>
+
 Scenario:
 
 - I want to develop a projectA written in Scala, which depends on projectB, also written in Scala.
 - It will often be the case that I need to modify projectB as well. Hence, I will have a local Git clone of projectB (as in [my repository](https://github.com/ComFreek/sbt-multi-project-question) as a submodule).
 - Now projectA should pull the dependency on projectB directly from that cloned Git repository of projectB.
+
+I now have the following setup, which is also available at GitHub: https://github.com/ComFreek/sbt-multi-project-question
+
+```
+| - .git
+|
+| - projectA
+| | - src
+| | - build.sbt
+|
+| - projectB (Git submodule)
+| | - src
+| | | - build.sbt
+| | | - project
+| | | - project.sbt
+| | | - ...
+```
 
 In `projectA/build.sbt` tried:
 
@@ -154,5 +175,10 @@ Concretely, you can reproduce it as follows:
 However, the following works:
 
 1. Open an SBT shell in `projectB/src`.
-2. Run `compile` (beware that it takes ~12 minutes on my machine!)
+2. Run `compile`<br>
+   Beware that it takes ~12 minutes on my machine and outputs a lot of warnings, but no errors.
 
+**Research.** There are some resources explaining how to share unmanaged libraries between subprojects (e.g. 1 and 2 below), but none them seem to face the issue that the *build setup* (not only the code!) also depends on those unmanaged libraries.
+
+1. https://stackoverflow.com/q/23919388/603003
+2. https://stackoverflow.com/q/26809331/603003)
